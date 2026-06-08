@@ -1,7 +1,3 @@
-# contoso-retail-performance-management
-End-to-end Power BI solution for retail performance management, combining financial KPIs, profitability analysis, margin leakage monitoring, geographic insights and store efficiency evaluation.
-
-
 # Contoso Retail Performance Management
 
 This project is an end-to-end Business Intelligence solution developed in Power BI using Microsoft's Contoso Retail DW dataset.
