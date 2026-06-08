@@ -33,3 +33,8 @@ The project focuses on transforming raw retail data into actionable business ins
 - Margin contribution drivers
 
 This project demonstrates the application of Business Intelligence techniques, financial analysis concepts and performance management methodologies in a retail environment.
+
+
+## Report Download
+
+The complete Power BI report (.pbix) is available in the Releases section of this repository.
