@@ -1,1 +1,504 @@
+# DAX Measures
+
+All report measures are stored in a dedicated measure table named `_Misure`.
+
+Measures are organized into the following categories:
+
+* Revenue & Profitability
+* Time Intelligence
+* Discount & Return Analysis
+* Margin Drivers
+* Geographic Performance
+* Store Performance
+* Supporting Measures
+
+---
+
+# Revenue & Profitability
+
+## Quantità Venduta
+
+Measures the total number of units sold.
+
+**Formula**
+
+```DAX
+SUM ( FactSales[SalesQuantity] )
+```
+
+---
+
+## Ricavi Netti
+
+Calculates net revenue after discounts and returns.
+
+**Formula**
+
+```DAX
+SUMX(
+    FactSales,
+    FactSales[SalesQuantity] * FactSales[UnitPrice]
+    - FactSales[ReturnAmount]
+    - FactSales[DiscountAmount]
+)
+```
+
+---
+
+## Ricavi Lordi
+
+Calculates gross sales before discounts and returns.
+
+**Formula**
+
+```DAX
+SUMX(
+    FactSales,
+    FactSales[UnitPrice] * FactSales[SalesQuantity]
+)
+```
+
+---
+
+## Costo Venduto
+
+Represents the total cost of goods sold.
+
+**Formula**
+
+```DAX
+SUM ( FactSales[TotalCost] )
+```
+
+---
+
+## Margine Lordo
+
+Measures profitability after deducting product costs.
+
+**Formula**
+
+```DAX
+[Ricavi Netti] - [Costo Venduto]
+```
+
+---
+
+## Gross Margin %
+
+Measures the profitability ratio of sales activities.
+
+**Formula**
+
+```DAX
+DIVIDE( [Margine Lordo], [Ricavi Netti] )
+```
+
+---
+
+# Time Intelligence
+
+## Ricavi Netti PY
+
+Calculates net revenue for the same period in the previous year.
+
+**Formula**
+
+```DAX
+CALCULATE(
+    [Ricavi Netti],
+    SAMEPERIODLASTYEAR( DimDate[Datekey] )
+)
+```
+
+---
+
+## Ricavi Netti YoY %
+
+Calculates year-over-year revenue growth.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Ricavi Netti] - [Ricavi Netti PY],
+    [Ricavi Netti PY]
+)
+```
+
+---
+
+## Margine Lordo PY
+
+Calculates gross margin for the same period in the previous year.
+
+**Formula**
+
+```DAX
+CALCULATE(
+    [Margine Lordo],
+    SAMEPERIODLASTYEAR( DimDate[Datekey] )
+)
+```
+
+---
+
+## Margine Lordo YoY %
+
+Calculates year-over-year gross margin growth.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Margine Lordo] - [Margine Lordo PY],
+    [Margine Lordo PY]
+)
+```
+
+---
+
+# Discount & Return Analysis
+
+## Importo Sconti
+
+Total value of discounts granted to customers.
+
+**Formula**
+
+```DAX
+SUM ( FactSales[DiscountAmount] )
+```
+
+---
+
+## Quantità Resa
+
+Total quantity of returned products.
+
+**Formula**
+
+```DAX
+SUM ( FactSales[ReturnQuantity] )
+```
+
+---
+
+## Importo Resi
+
+Total value of returned products.
+
+**Formula**
+
+```DAX
+SUM ( FactSales[ReturnAmount] )
+```
+
+---
+
+## Discount Rate %
+
+Measures the incidence of discounts on gross revenue.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Importo Sconti],
+    [Ricavi Netti] + [Importo Sconti]
+)
+```
+
+---
+
+## Return Rate %
+
+Measures the percentage of sold units that were returned.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Quantità Resa],
+    [Quantità Venduta]
+)
+```
+
+---
+
+## Margin Leakage
+
+Represents profitability erosion caused by discounts and returns.
+
+**Formula**
+
+```DAX
+[Importo Sconti] + [Importo Resi]
+```
+
+---
+
+## Margin Leakage %
+
+Measures margin leakage as a percentage of gross revenue.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Margin Leakage],
+    [Ricavi Lordi]
+)
+```
+
+---
+
+# Margin Drivers
+
+## Incidenza Ricavi %
+
+Measures the contribution of a product or category to total revenue.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Ricavi Netti],
+    CALCULATE(
+        [Ricavi Netti],
+        ALLSELECTED(DimProduct)
+    )
+)
+```
+
+---
+
+## Margine Medio per Unità
+
+Average profitability generated per unit sold.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Margine Lordo],
+    [Quantità Venduta]
+)
+```
+
+---
+
+## Incidenza Costi %
+
+Measures the percentage of revenue absorbed by product costs.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Costo Venduto],
+    [Ricavi Netti]
+)
+```
+
+---
+
+## Incidenza Leakage %
+
+Measures the percentage of revenue lost through discounts and returns.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Margin Leakage],
+    [Ricavi Netti]
+)
+```
+
+---
+
+# Geographic Performance
+
+## Country Count
+
+Counts the number of countries in the current filter context.
+
+**Formula**
+
+```DAX
+DISTINCTCOUNT(
+    DimGeography[RegionCountryName]
+)
+```
+
+---
+
+## Revenue per Country
+
+Average revenue generated per country.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Ricavi Netti],
+    [Country Count]
+)
+```
+
+---
+
+## Revenue Share %
+
+Measures each country's contribution to total revenue.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Ricavi Netti],
+    CALCULATE(
+        [Ricavi Netti],
+        ALL(DimGeography[RegionCountryName])
+    )
+)
+```
+
+---
+
+# Store Performance
+
+## Numero Store
+
+Counts the number of stores in the current filter context.
+
+**Formula**
+
+```DAX
+DISTINCTCOUNT(
+    DimStore[StoreKey]
+)
+```
+
+---
+
+## Ricavo Medio per Store
+
+Average revenue generated by each store.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Ricavi Netti],
+    [Numero Store]
+)
+```
+
+---
+
+## Margine Medio per Store
+
+Average gross margin generated by each store.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Margine Lordo],
+    [Numero Store]
+)
+```
+
+---
+
+## Revenue per Employee
+
+Measures workforce productivity.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Ricavi Netti],
+    SUM(DimStore[EmployeeCount])
+)
+```
+
+---
+
+## Margin per Employee
+
+Measures profitability generated by each employee.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Margine Lordo],
+    SUM(DimStore[EmployeeCount])
+)
+```
+
+---
+
+## Revenue per Sqm
+
+Measures store space utilization efficiency.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Ricavi Netti],
+    SUM(DimStore[SellingAreaSize])
+)
+```
+
+---
+
+## Margin per Sqm
+
+Measures profitability generated by each square meter of selling area.
+
+**Formula**
+
+```DAX
+DIVIDE(
+    [Margine Lordo],
+    SUM(DimStore[SellingAreaSize])
+)
+```
+
+---
+
+# Supporting Measures
+
+The report also contains several supporting measures used for:
+
+* Custom SVG visuals
+* Dynamic labels
+* Waterfall chart calculations
+* Conditional formatting
+* Report-level visual enhancements
+
+These measures support the user experience but are not considered core business KPIs.
+
+---
+
+# Measure Table
+
+All measures are stored in the dedicated `_Misure` table following Power BI best practices.
+
+This approach improves:
+
+* Model organization
+* Maintainability
+* Reusability
+* Documentation quality
+* Semantic model readability
+
+```
+```
 
