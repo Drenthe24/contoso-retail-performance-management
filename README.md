@@ -40,7 +40,7 @@ Main metrics:
 * Discount Rate
 * Return Rate
 
-
+![Testo alternativo](screenshots/01.Executive_Overview.png)
 
 ---
 
