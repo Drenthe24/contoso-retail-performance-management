@@ -40,7 +40,7 @@ Main metrics:
 * Discount Rate
 * Return Rate
 
-![Testo alternativo](screenshots/01.Executive_Overview.png)
+![Overview](screenshots/01.Executive_Overview.png)
 
 ---
 
@@ -56,7 +56,7 @@ Main features:
 * Product profitability
 * Revenue contribution
 
-![Sales & Margin Analysis](screenshots/02_sales_margin_analysis.png)
+![Sales & Margin Analysis](screenshots/04.Sales_&_Margin_Analysis.png)
 
 ---
 
@@ -71,7 +71,7 @@ Main features:
 * Margin Leakage monitoring
 * Product-level leakage identification
 
-![Discount & Return Analysis](screenshots/03_discount_return_analysis.png)
+![Discount & Return Analysis](screenshots/05.Discount_&_Return_Analysis.png)
 
 ---
 
@@ -86,7 +86,7 @@ Main features:
 * Cost incidence analysis
 * Revenue contribution analysis
 
-![Margin Drivers Analysis](screenshots/04_margin_drivers_analysis.png)
+![Margin Drivers Analysis](screenshots/02.Margin_Drivers_Analysis.png)
 
 ---
 
@@ -101,7 +101,7 @@ Main features:
 * Regional profitability analysis
 * Territory performance comparison
 
-![Geographic Performance](screenshots/05_geographic_performance.png)
+![Geographic Performance](screenshots/06.Geographic_Performance.png)
 
 ---
 
@@ -117,7 +117,7 @@ Main features:
 * Store format comparison
 * Operational efficiency analysis
 
-![Store Performance](screenshots/06_store_performance.png)
+![Store Performance](screenshots/03.Stores_Performance.png)
 
 ---
 
