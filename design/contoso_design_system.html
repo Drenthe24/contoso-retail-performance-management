@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Contoso · Design System — Tech Dark</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0C0C0E;
+    --panel:    #111115;
+    --card:     #16161B;
+    --raised:   #1C1C23;
+    --border:   rgba(255,255,255,0.07);
+    --border-hi:rgba(255,255,255,0.14);
+    --white:    #FFFFFF;
+    --text1:    #F5F4F0;
+    --text2:    rgba(245,244,240,0.55);
+    --text3:    rgba(245,244,240,0.28);
+    --accent:   #E8C97A;
+    --up:       #5ECFA0;
+    --down:     #E86A5E;
+    --blue:     #7B9FE8;
+    --red:      #E87B7B;
+    --mint:     #7BE8C9;
+    --muted:    #8A8A95;
+    --grid:     #5A5A65;
+    --r: 16px;
+  }
+  * { margin:0;padding:0;box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text1); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; }
+  .page { max-width:960px; margin:0 auto; padding:48px 32px; }
+
+  .hero { padding:52px 0 40px; border-bottom:1px solid var(--border); margin-bottom:48px; }
+  .hero-eyebrow { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:3px; color:var(--accent); text-transform:uppercase; margin-bottom:12px; }
+  .hero-title { font-family:'Syne',sans-serif; font-size:40px; font-weight:800; color:var(--white); letter-spacing:-1px; line-height:1.1; }
+  .hero-title span { color:var(--text2); font-weight:600; }
+  .hero-sub { margin-top:14px; font-size:14px; color:var(--text2); line-height:1.7; max-width:650px; }
+
+  .badge-row { display:flex; gap:8px; margin-top:20px; flex-wrap:wrap; }
+  .badge {
+    display:inline-flex; align-items:center; gap:6px;
+    padding:5px 12px; border-radius:20px; font-size:10px; font-weight:500;
+    font-family:'JetBrains Mono',monospace; letter-spacing:0.5px;
+    border:1px solid var(--border-hi); color:var(--text2);
+  }
+  .badge.gold  { border-color:rgba(232,201,122,0.35); color:var(--accent); background:rgba(232,201,122,0.06); }
+  .badge.green { border-color:rgba(94,207,160,0.3);  color:var(--up);     background:rgba(94,207,160,0.06); }
+
+  .section { margin-bottom:52px; }
+  .section-head { display:flex; align-items:center; gap:14px; margin-bottom:24px; }
+  .section-num {
+    width:32px; height:32px; border-radius:10px;
+    background:var(--accent); display:flex; align-items:center; justify-content:center;
+    font-family:'Syne',sans-serif; font-size:14px; font-weight:800; color:var(--bg);
+    flex-shrink:0;
+  }
+  .section-title { font-family:'Syne',sans-serif; font-size:20px; font-weight:700; color:var(--white); }
+  .section-sub { font-size:12px; color:var(--text3); margin-top:2px; font-family:'JetBrains Mono',monospace; letter-spacing:1px; }
+
+  .card {
+    background:var(--panel); border:1px solid var(--border);
+    border-radius:var(--r); padding:22px 24px; margin-bottom:12px;
+  }
+  .card-title {
+    font-size:12px; font-weight:600; color:var(--white);
+    letter-spacing:0.2px; margin-bottom:10px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .card-title .dot { width:7px; height:7px; border-radius:2px; flex-shrink:0; }
+  .card p { font-size:13px; color:var(--text2); line-height:1.7; margin-bottom:10px; }
+  .card p:last-child { margin-bottom:0; }
+
+  .palette { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; margin-top:4px; }
+  .swatch {
+    display:flex; align-items:center; gap:12px;
+    padding:12px 14px; border-radius:10px;
+    border:1px solid var(--border); background:var(--card);
+  }
+  .swatch-color { width:36px; height:36px; border-radius:8px; flex-shrink:0; border:1px solid rgba(255,255,255,0.08); }
+  .swatch-hex { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--white); font-weight:500; }
+  .swatch-name { font-size:10px; color:var(--text3); margin-top:2px; }
+
+  .steps { display:flex; flex-direction:column; gap:10px; }
+  .step {
+    display:flex; gap:14px; align-items:flex-start;
+    padding:16px 18px; border-radius:12px;
+    background:var(--card); border:1px solid var(--border);
+  }
+  .step-n {
+    width:24px; height:24px; border-radius:7px; flex-shrink:0;
+    background:var(--raised); display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text2); font-weight:500;
+    margin-top:1px;
+  }
+  .step-title { font-size:13px; font-weight:600; color:var(--text1); margin-bottom:4px; }
+  .step-desc { font-size:12px; color:var(--text2); line-height:1.65; }
+
+  code {
+    font-family:'JetBrains Mono',monospace; font-size:11px;
+    background:var(--raised); color:var(--accent);
+    padding:1px 6px; border-radius:4px; letter-spacing:0;
+  }
+
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+  .usage-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .usage-card {
+    background:var(--card); border:1px solid var(--border); border-radius:var(--r);
+    padding:18px; min-height:150px;
+  }
+  .usage-card .label { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--text3); text-transform:uppercase; margin-bottom:12px; }
+  .usage-card .value { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; margin-bottom:8px; }
+  .usage-card .desc { font-size:12px; color:var(--text2); line-height:1.65; }
+
+  .spec-table { width:100%; border-collapse:collapse; }
+  .spec-table th {
+    font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px;
+    color:var(--text3); text-transform:uppercase; text-align:left;
+    padding:0 12px 10px; border-bottom:1px solid var(--border);
+  }
+  .spec-table td {
+    padding:11px 12px; border-bottom:1px solid var(--border);
+    font-size:12px; color:var(--text2);
+  }
+  .spec-table td:first-child { color:var(--text1); font-weight:500; }
+  .spec-table td code { font-size:10px; }
+  .spec-table tr:last-child td { border-bottom:none; }
+
+  .note {
+    display:flex; gap:12px; padding:14px 16px;
+    border-radius:10px; border-left:3px solid;
+    margin:12px 0;
+  }
+  .note.tip  { background:rgba(232,201,122,0.07); border-color:var(--accent); }
+  .note.warn { background:rgba(232,106,94,0.07);  border-color:var(--down); }
+  .note.info { background:rgba(94,207,160,0.07);  border-color:var(--up); }
+  .note-icon { font-size:15px; flex-shrink:0; margin-top:1px; }
+  .note-text { font-size:12px; color:var(--text2); line-height:1.65; }
+  .note-text strong { color:var(--text1); }
+
+  hr { border:none; border-top:1px solid var(--border); margin:40px 0; }
+  ::-webkit-scrollbar { width:4px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--raised); border-radius:99px; }
+
+  @media (max-width: 720px) {
+    .two-col, .three-col, .usage-grid { grid-template-columns:1fr; }
+    .hero-title { font-size:32px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-eyebrow">Power BI Design System</div>
+    <div class="hero-title">Contoso Tech Dark <span>Color Guide</span></div>
+    <div class="hero-sub">
+      A practical guide to the color palette, typography hierarchy and visual principles used in the
+      <strong>Contoso Retail Performance Management</strong> dashboard. This document explains the overall look and feel of the report without going page by page.
+    </div>
+    <div class="badge-row">
+      <div class="badge gold">Dark Theme</div>
+      <div class="badge gold">Power BI JSON Theme</div>
+      <div class="badge green">Reusable Design System</div>
+      <div class="badge">Syne · Inter · JetBrains Mono</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">1</div>
+      <div>
+        <div class="section-title">Design Principles</div>
+        <div class="section-sub">General principles behind the visual style</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="dot" style="background:var(--accent)"></div>Purpose of the theme</div>
+      <p>
+        The <strong>Contoso Tech Dark</strong> theme was created for an executive-style performance management dashboard.
+        Its goal is not to make the report decorative, but to make key metrics, trends and outliers easy to read at a glance.
+      </p>
+      <p>
+        The dark background keeps the interface quiet, while the accent colors guide attention toward the numbers and business signals that matter most.
+      </p>
+    </div>
+
+    <div class="three-col">
+      <div class="card">
+        <div class="card-title"><div class="dot" style="background:var(--accent)"></div>Focus</div>
+        <p>Important elements use strong contrast and brighter colors. Supporting information stays neutral and does not compete for attention.</p>
+      </div>
+      <div class="card">
+        <div class="card-title"><div class="dot" style="background:var(--blue)"></div>Consistency</div>
+        <p>The same metric, category or business concept should keep the same visual treatment across the whole report.</p>
+      </div>
+      <div class="card">
+        <div class="card-title"><div class="dot" style="background:var(--up)"></div>Hierarchy</div>
+        <p>Color, typography and spacing are used to clearly separate KPIs, titles, labels, axes and supporting notes.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">2</div>
+      <div>
+        <div class="section-title">Core Palette</div>
+        <div class="section-sub">Structural colors used across the report</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="dot" style="background:var(--text3)"></div>Backgrounds & depth levels</div>
+      <div class="palette">
+        <div class="swatch"><div class="swatch-color" style="background:#0C0C0E"></div><div><div class="swatch-hex">#0C0C0E</div><div class="swatch-name">Canvas / Page Background</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#111115"></div><div><div class="swatch-hex">#111115</div><div class="swatch-name">Visual Panel</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#16161B"></div><div><div class="swatch-hex">#16161B</div><div class="swatch-name">Card / Row Background</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#1C1C23"></div><div><div class="swatch-hex">#1C1C23</div><div class="swatch-name">Raised Elements / Hover</div></div></div>
+      </div>
+    </div>
+
+    <div class="note info">
+      <div class="note-icon">✦</div>
+      <div class="note-text">
+        The structural palette uses very close shades of dark gray. This keeps the dashboard calm, while still creating a subtle hierarchy between the page, panels, cards and hover states.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="dot" style="background:var(--white)"></div>Text & neutral colors</div>
+      <div class="palette">
+        <div class="swatch"><div class="swatch-color" style="background:#FFFFFF"></div><div><div class="swatch-hex">#FFFFFF</div><div class="swatch-name">KPI Values / Main Numbers</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#F5F4F0"></div><div><div class="swatch-hex">#F5F4F0</div><div class="swatch-name">Primary Text</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#8A8A95"></div><div><div class="swatch-hex">#8A8A95</div><div class="swatch-name">Labels / Subtitles</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#5A5A65"></div><div><div class="swatch-hex">#5A5A65</div><div class="swatch-name">Axis / Grid / Dim Text</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">3</div>
+      <div>
+        <div class="section-title">Semantic Colors</div>
+        <div class="section-sub">Colors with a functional meaning</div>
+      </div>
+    </div>
+
+    <div class="usage-grid">
+      <div class="usage-card">
+        <div class="label">Primary accent</div>
+        <div class="value" style="color:#E8C97A">Gold</div>
+        <div class="desc">Used to highlight primary KPIs, focus areas and strategic metrics.</div>
+      </div>
+      <div class="usage-card">
+        <div class="label">Positive</div>
+        <div class="value" style="color:#5ECFA0">Up</div>
+        <div class="desc">Used for growth, positive year-over-year changes and favorable business signals.</div>
+      </div>
+      <div class="usage-card">
+        <div class="label">Negative</div>
+        <div class="value" style="color:#E86A5E">Down</div>
+        <div class="desc">Used for declines, margin erosion, warnings and unfavorable changes.</div>
+      </div>
+      <div class="usage-card">
+        <div class="label">Analytical</div>
+        <div class="value" style="color:#7B9FE8">Blue</div>
+        <div class="desc">Used for data series, comparisons and neutral analytical views.</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <div class="card-title"><div class="dot" style="background:var(--accent)"></div>Main accents</div>
+      <div class="palette">
+        <div class="swatch"><div class="swatch-color" style="background:#E8C97A"></div><div><div class="swatch-hex">#E8C97A</div><div class="swatch-name">Accent Gold / Executive Focus</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#5ECFA0"></div><div><div class="swatch-hex">#5ECFA0</div><div class="swatch-name">Positive / Growth</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#E86A5E"></div><div><div class="swatch-hex">#E86A5E</div><div class="swatch-name">Negative / Warning</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#3A3A45"></div><div><div class="swatch-hex">#3A3A45</div><div class="swatch-name">Neutral / Baseline</div></div></div>
+      </div>
+    </div>
+
+    <div class="note tip">
+      <div class="note-icon">💡</div>
+      <div class="note-text">
+        Semantic colors should be used with intention. In a dark dashboard, too many bright accents make it harder for users to understand what really deserves attention.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">4</div>
+      <div>
+        <div class="section-title">Data Series Colors</div>
+        <div class="section-sub">Colors for categories and data series</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="dot" style="background:var(--blue)"></div>Data series palette</div>
+      <p>
+        Data series use bright but controlled colors, so they remain readable on the dark theme without overpowering the KPIs.
+        The palette works well for bar charts, line charts, treemaps, heatmaps and product categories.
+      </p>
+      <div class="palette">
+        <div class="swatch"><div class="swatch-color" style="background:#7B9FE8"></div><div><div class="swatch-hex">#7B9FE8</div><div class="swatch-name">Series Blue / Territory</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#E8C97A"></div><div><div class="swatch-hex">#E8C97A</div><div class="swatch-name">Series Gold / Key Category</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#E87B7B"></div><div><div class="swatch-hex">#E87B7B</div><div class="swatch-name">Series Coral / Warning Category</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#7BE8C9"></div><div><div class="swatch-hex">#7BE8C9</div><div class="swatch-name">Series Mint / Secondary Category</div></div></div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div class="step-body">
+          <div class="step-title">Keep colors consistent across pages</div>
+          <div class="step-desc">A category, region or business concept should keep the same color wherever it appears in the report.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div class="step-body">
+          <div class="step-title">Avoid random palettes</div>
+          <div class="step-desc">Avoid relying on automatically assigned Power BI colors when the visual represents important business categories.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div class="step-body">
+          <div class="step-title">Use heatmaps to show intensity</div>
+          <div class="step-desc">For matrices and heatmaps, use controlled gradients. The goal is to highlight concentration and relative weight, not to create a rainbow effect.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">5</div>
+      <div>
+        <div class="section-title">Typography</div>
+        <div class="section-sub">Font hierarchy and readability</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="dot" style="background:var(--accent)"></div>Font roles</div>
+      <table class="spec-table">
+        <thead><tr><th>Usage</th><th>Font</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Page titles</td><td><code>Syne</code></td><td>Used for main titles and high-impact callouts. It gives the dashboard a distinctive identity.</td></tr>
+          <tr><td>Body / visual text</td><td><code>Inter</code> or <code>Segoe UI</code></td><td>Used for descriptions, labels and standard report content. The priority here is readability.</td></tr>
+          <tr><td>Technical labels</td><td><code>JetBrains Mono</code></td><td>Used for badges, dates, codes, small labels and metadata. It creates a subtle technical feel without distracting from the business content.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note warn">
+      <div class="note-icon">⚠</div>
+      <div class="note-text">
+        Power BI Service may not always render custom fonts depending on the browser or tenant configuration. For standard visuals, <strong>Segoe UI</strong> is a safe fallback.
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <div style="text-align:center;padding:24px 0 40px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:2px">
+    CONTOSO · TECH DARK · DESIGN SYSTEM
+  </div>
+
+</div>
+</body>
+</html>
